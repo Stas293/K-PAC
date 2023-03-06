@@ -65,16 +65,16 @@ public class KnowledgePackageSetController {
     public String save(@Valid NewKnowledgePackageSetDto knowledgePackageSet,
                        BindingResult bindingResult,
                        Model model) {
-        KnowledgePackageSet knowledgePackageSet1 = Mapper.map(knowledgePackageSet, KnowledgePackageSet.class);
-        knowledgePackageSet1.setKnowledgePackages(
-                knowledgePackageService.findAllById(
-                        knowledgePackageSet.getKnowledgePackages()));
         if (bindingResult.hasErrors()) {
             model.addAttribute("knowledgePackages", knowledgePackageService.findAll());
             model.addAttribute("knowledgePackageSet", knowledgePackageSet);
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "sets/new";
         }
+        KnowledgePackageSet knowledgePackageSet1 = Mapper.map(knowledgePackageSet, KnowledgePackageSet.class);
+        knowledgePackageSet1.setKnowledgePackages(
+                knowledgePackageService.findAllById(
+                        knowledgePackageSet.getKnowledgePackages()));
         knowledgePackageSetService.save(knowledgePackageSet1);
         return "redirect:/sets";
     }

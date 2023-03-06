@@ -1,5 +1,6 @@
 package org.spring.app.dto;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +17,6 @@ public class NewKnowledgePackageSetDto {
     private Long id;
     @Size(min = 3, max = 250, message = "Title must be between 3 and 250 characters")
     private String title;
+    @NotNull(message = "Knowledge packages must be selected")
     private List<Long> knowledgePackages;
 }
